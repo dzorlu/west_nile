@@ -24,4 +24,4 @@ Most seamless way to run the script is using a [Docker](https://github.com/udaci
 $ docker run -it --rm -p 8888:8888 -v `pwd`:/src udacity/carnd-term1-starter-kit
 ```
 
-The project currently lives in two files. `utils.py`(https://github.com/dzorlu/west_nile/blob/master/src/utils.py) contains the pre-processing logic. `model.py`(https://github.com/dzorlu/west_nile/blob/master/src/model.py) is used to build and train the model and to make predictions.
+The project currently lives in two files. [`utils.py`](https://github.com/dzorlu/west_nile/blob/master/src/utils.py) contains the pre-processing logic. [`model.py`](https://github.com/dzorlu/west_nile/blob/master/src/model.py) is used to build and train the model and to make predictions.
