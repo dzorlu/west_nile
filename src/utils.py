@@ -25,6 +25,7 @@ DUMMY_COLUMNS, TARGET_VARIABLE = ['Species'], 'WnvPresent'
 
 KNN_FILE = "../output/knn"
 NUM_LOOKBACK_DAYS = 5
+NN = 3
 
 def process_spray_data():
     _weather = pd.read_csv("../input/spray.csv")[WEATHER_COLS]
@@ -81,7 +82,7 @@ def get_train_or_test_data(train=True):
         months = set(_temp.month.astype(int).tolist())
         neighborhood_model = {}
         for _month in months:
-            neigh = KNeighborsRegressor(n_neighbors=5)
+            neigh = KNeighborsRegressor(n_neighbors= NN)
             _data = _temp[['Longitude','Latitude','NumMosquitos','month']][_temp['month'] == _month]
             _data = _data.groupby(['Longitude','Latitude']).mean()['NumMosquitos'].reset_index()
             _X, _y = np.array(_data[['Longitude','Latitude']]), _data['NumMosquitos']
