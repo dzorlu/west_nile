@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 
 import pandas as pd
 import numpy as np
@@ -5,19 +6,20 @@ from keras import optimizers
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation
 from sklearn.model_selection import KFold
+from keras.regularizers import l2
 
 from sklearn import metrics
 from datetime import datetime
 
 from utils import *
 
-NUM_FOLDS = 10
+NUM_FOLDS = 5
 
 def build_model(input_dim, output_dim):
     """Creates a three layer Keras NN model"""
     print("Building the model...")
     model = Sequential()
-    model.add(Dense(64, input_dim=input_dim))
+    model.add(Dense(32, input_dim=input_dim))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
 
@@ -74,8 +76,6 @@ def run():
     preds = fitted_model.predict_proba(X_test, verbose=0)
     save_predictions(preds)
 
-
-
-
 if __name__ == '__main__':
+    print("run")
     run()
