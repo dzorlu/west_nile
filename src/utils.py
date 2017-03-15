@@ -21,10 +21,10 @@ WEATHER_COLS = ['Date','Tmax', 'Tmin',
        'WetBulb', 'StnPressure','PrecipTotal',
        'ResultSpeed','SeaLevel']
 
-DUMMY_COLUMNS, TARGET_VARIABLE = ['month','Species'], 'WnvPresent'
+DUMMY_COLUMNS, TARGET_VARIABLE = ['Species'], 'WnvPresent'
 
 KNN_FILE = "../output/knn"
-NUM_LOOKBACK_DAYS = 10
+NUM_LOOKBACK_DAYS = 5
 
 def process_spray_data():
     _weather = pd.read_csv("../input/spray.csv")[WEATHER_COLS]
@@ -81,7 +81,7 @@ def get_train_or_test_data(train=True):
         months = set(_temp.month.astype(int).tolist())
         neighborhood_model = {}
         for _month in months:
-            neigh = KNeighborsRegressor(n_neighbors=3)
+            neigh = KNeighborsRegressor(n_neighbors=5)
             _data = _temp[['Longitude','Latitude','NumMosquitos','month']][_temp['month'] == _month]
             _data = _data.groupby(['Longitude','Latitude']).mean()['NumMosquitos'].reset_index()
             _X, _y = np.array(_data[['Longitude','Latitude']]), _data['NumMosquitos']
@@ -150,7 +150,7 @@ def preprocess_data(X, train=True, scaler=None):
         # appending here so that dims match at test time
         dummy['UNSPECIFIED CULEX'] = 0.
         # drop month 5 as it is not present in test data
-        dummy = dummy.drop("05",axis=1)
+        #dummy = dummy.drop("05",axis=1)
     X = pd.concat([X,dummy],axis=1)
 
     # Standardize features by removing the mean and scaling to unit variance
