@@ -13,7 +13,7 @@ from datetime import datetime
 
 from utils import *
 
-NUM_FOLDS = 5
+NUM_FOLDS = 4
 
 def build_model(input_dim, output_dim):
     """Creates a three layer Keras NN model"""
